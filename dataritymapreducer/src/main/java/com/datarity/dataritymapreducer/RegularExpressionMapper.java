@@ -9,6 +9,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileStatus;
+import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
@@ -140,12 +142,33 @@ public class RegularExpressionMapper {
 		FileOutputFormat.setOutputPath(job, new Path(outputPath + "/" + date.getTime()));
 
 		job.waitForCompletion(true);
+		
+		copyJobDataToLocal("/Users/barath/b/barath/hackathon/doc/");
 	}
-	public static void main(String args[]) throws Exception {
-		runJob(args[2], args[0], args[1]);
+	
+	private static void copyJobDataToLocal(String outputLocalDir) {
+		try {
+	        Configuration conf = new Configuration();
+//	        conf.set("fs.defaultFS", "hdfs://192.168.255.182:54310/user/hadoop/");
+	        FileSystem fs = FileSystem.get(conf);
+	        FileStatus[] status = fs.listStatus(new Path("/Users/barath/b/barath/hackathon/s/outputfiles/"));
+	        System.out.println("Num of scans completed i.e. num folder: " + status.length);
+	        delete(new File(outputLocalDir));
+	        for(int i=0;i<status.length;i++){
+	            System.out.println(status[i].getPath());
+	            fs.copyToLocalFile(false, status[i].getPath(), new Path(outputLocalDir));
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
 
-	static void delete(File f) throws IOException {
+	public static void main(String args[]) throws Exception {
+//		runJob(args[2], args[0], args[1]);
+		copyJobDataToLocal("/Users/barath/b/barath/hackathon/doc/");
+	}
+
+	private static void delete(File f) throws IOException {
 		if (f.isDirectory()) {
 			for (File c : f.listFiles())
 				delete(c);

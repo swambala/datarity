@@ -5,8 +5,8 @@ import java.util.Map;
 
 public class DatarityScanResult {
 
-	private int id;
-	
+	private String id;
+
 	private long totalSecurityEscape;
 	
 	private long totalCreditCardNum;
@@ -17,10 +17,10 @@ public class DatarityScanResult {
 	private Map<String, Long> fileNameToSecurityEscape = new HashMap<String, Long>();
 	private Map<String, Map<String, Long>> fileNameToSecurityTypeToEscape = new HashMap<String, Map<String,Long>>();
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public long getTotalSecurityEscape() {

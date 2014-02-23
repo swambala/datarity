@@ -1,13 +1,14 @@
 package com.datarity.webapp.service;
 
 import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
@@ -27,6 +28,7 @@ import com.datarity.webapp.model.DatarityScanResult;
 public class DatarityService {
 	
 	private static final Logger logger = Logger.getLogger(DatarityService.class);
+	private static final String DEFAULT_PATH_OUTPUT = "/Users/barath/b/barath/hackathon/s/outputfiles/";
 	
 	@RequestMapping(value = "/scan", method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody String scan(@RequestBody DatarityScanRequest drReq) {
@@ -43,16 +45,29 @@ public class DatarityService {
 		DatarityScanResponse drRes = new DatarityScanResponse();
 		drRes.setId(2);
 		
+		String[] allFolderNames = getAllFolderNames(DEFAULT_PATH_OUTPUT);
+		DatarityScanResult drScanResult;
+		for (int i = 0; i < allFolderNames.length; i++) {
+			drScanResult = getDRScanResult(DEFAULT_PATH_OUTPUT + allFolderNames[i]);
+			if (drScanResult == null) {
+				continue;
+			}
+			drScanResult.setId(allFolderNames[i]);
+			drRes.getResults().add(drScanResult);
+		}
+		
 		return getJson(drRes);
 	}
 
 	@RequestMapping(value = "/scandetail/{id}", method = RequestMethod.GET)
 	public @ResponseBody String scanDetail(@PathVariable("id") String id) {
 		logger.debug("Request to Scan Detail id : " + id);
+		
 		DatarityScanResponse drRes = new DatarityScanResponse();
-		drRes.setId(3);
+//		drRes.setId(0);
 
-		DatarityScanResult scanResult = getDRScanResult("sampledata.txt");
+		DatarityScanResult scanResult = getDRScanResult(DEFAULT_PATH_OUTPUT + id);
+		scanResult.setId(id);
 		List<DatarityScanResult> results = new ArrayList<DatarityScanResult>();
 		results.add(scanResult);
 		drRes.setResults(results );
@@ -63,7 +78,12 @@ public class DatarityService {
 	private DatarityScanResult getDRScanResult(String filePath) {
 		DatarityScanResult scanResult = new DatarityScanResult();
 		try {
-			List<String> readLines = IOUtils.readLines(DatarityService.class.getResourceAsStream(filePath));
+//			List<String> readLines = IOUtils.readLines(DatarityService.class.getResourceAsStream(filePath));
+			List<String> readLines = getFileLines(filePath);
+			
+			if (readLines.isEmpty()) {
+				return null;
+			}
 			
 			String[] words;
 			String firstWord;
@@ -133,4 +153,81 @@ public class DatarityService {
 		}
 		return "{status:\"-1\", error:\"Exception\"}";
 	}
+	
+	private static String[] getAllFolderNames(String dirPath) {
+		File file = new File(dirPath);
+		String[] directories = file.list(new FilenameFilter() {
+		  @Override
+		  public boolean accept(File current, String name) {
+		    return new File(current, name).isDirectory();
+		  }
+		});
+		return directories;
+	}
+	
+	private static List<String> getFileLines(String dirPath) {
+		try {
+			String fileName = dirPath + "/" + "part-r-00000";
+			logger.info("File Name: " + fileName);
+			return FileUtils.readLines(new File(fileName));
+		} catch (IOException e) {
+//			e.printStackTrace();
+			logger.info("NO File found: " + dirPath);
+		}
+		return new ArrayList<String>();
+	}
+	
+	public static void main(String[] args) throws Exception {
+		DatarityService self = new DatarityService();
+		System.out.println(self.scanHistory());
+	}
+	/*private static void getFile() throws Exception {
+		Configuration configuration = new Configuration();
+//		configuration.set("fs.defaultFS", "hdfs://192.168.255.182:54310/");
+		configuration.set("fs.defaultFS", "hdfs://sandbox.hortonworks.com:8020");
+//		configuration.set("hadoop.job.ugi", "hbase");
+		
+		FileSystem fs = FileSystem.get(configuration);
+
+		Path ptRead=new Path("user/datarity/0.txt");
+        FSDataInputStream open = fs.open(ptRead);
+		InputStreamReader inputStreamReader = new InputStreamReader(open);
+		BufferedReader br=new BufferedReader(inputStreamReader);
+
+        String line = br.readLine();
+        
+        int lineCount = 0;
+        while (line != null){
+			line=br.readLine();
+			System.out.println(line);
+			if ( ++lineCount == 10) {
+				break;
+			}
+        }
+	}
+	
+	private static void writefi() {
+		try {
+	        Configuration conf = new Configuration();
+//	        conf.set("fs.defaultFS", "hdfs://localhost:54310/user/hadoop/");
+//	        conf.set("fs.defaultFS", "hdfs://192.168.255.182:54310/user");
+//	        conf.set("fs.defaultFS", "hdfs://sandbox.hortonworks.com:8020");
+	        conf.set("fs.defaultFS", "hdfs://192.168.255.182:8020");
+	        FileSystem fs = FileSystem.get(conf);
+//	        FileStatus[] status = fs.listStatus(new Path("/users/barath/b/barath/hackathon/s/dump"));
+//	        for(int i=0;i<status.length;i++){
+//	            System.out.println(status[i].getPath());
+//	            fs.copyFromLocalFile(false, status[i].getPath(), new Path("/datarity/"));
+//	        }
+	        
+//	        fs.createNewFile(new Path("/users/barath/b/barath/hackathon/s/dump/abc.txt"));
+	        fs.createNewFile(new Path("/user/datarity/abc.txt"));
+	        fs.close();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+		System.out.println("done");
+	}*/
+	
+	
 }
