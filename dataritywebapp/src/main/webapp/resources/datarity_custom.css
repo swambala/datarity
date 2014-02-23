@@ -1,0 +1,123 @@
+.dashboard-stat .visual {
+    font-size: 35px;
+    line-height: 35px;
+    width: 80px;
+    height: 80px;
+    display: block;
+    float: left;
+    padding-top: 10px;
+    padding-left: 15px;
+    margin-bottom: 10px;
+}
+.dashboard-stat .details {
+    position: absolute;
+    right: 15px;
+    padding-right: 10px;
+}
+.dashboard-stat .details .number {
+    padding-top: 15px;
+    text-align: right;
+    font-size: 34px;
+    line-height: 34px;
+    letter-spacing: -1px;
+    margin-bottom: 5px;
+    font-weight: 300;
+    color: #fff;
+}
+.dashboard-stat .details .desc {
+    text-align: right;
+    font-size: 16px;
+    letter-spacing: 0px;
+    font-weight: 300;
+    color: #fff;
+}
+.dashboard-stat.blue .more {
+    background-color: #208dbe;
+    clear: both;
+    display: block;
+    padding: 5px 10px 5px 10px;
+    text-transform: uppercase;
+    font-weight: 300;
+    font-size: 11px;
+    color: #fff;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+}
+.dashboard-stat a, .dashboard-stat a:focus, .dashboard-stat a:hover,.dashboard-stat a:active {
+    text-decoration: none;
+    outline: 0;
+    text-shadow: none !important;
+    background: 0 0;
+}
+.dashboard-stat .visual i {
+    font-size: 65px;
+    line-height: 65px;
+    color: #fff;
+}
+
+.dashboard-stat .visual .fa {
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.fa-comments:before {
+content: "\f086";
+}
+.dashboard-stat.green .more {
+    background-color: #10a062;
+    clear: both;
+    display: block;
+    padding: 5px 10px 5px 10px;
+    text-transform: uppercase;
+    font-weight: 300;
+    font-size: 11px;
+    color: #fff;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+}
+
+.dashboard-stat.purple .more {
+    background-color: #6e1881;
+    clear: both;
+    display: block;
+    padding: 5px 10px 5px 10px;
+    text-transform: uppercase;
+    font-weight: 300;
+    font-size: 11px;
+    color: #fff;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+}
+
+.dashboard-stat.yellow .more {
+    background-color: #cb871b;
+    clear: both;
+    display: block;
+    padding: 5px 10px 5px 10px;
+    text-transform: uppercase;
+    font-weight: 300;
+    font-size: 11px;
+    color: #fff;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+}
+
+
+.portlet-title > .caption {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    font-weight: bold;
+    font-style: normal;
+    font-variant: normal;
+    font-size: 16px;
+    line-height: normal;
+    font-family: Arial;
+    color: #444444;
+    fill: #444444;
+    text-anchor: start;
+    text-align: center;
+}

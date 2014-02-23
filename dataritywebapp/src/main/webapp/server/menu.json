@@ -1,0 +1,185 @@
+{"items": 
+[
+  {
+    "title": "Dashboard",
+    "iconCls": "dashboard",
+    "id": "dashboard_tree",
+    "items": [
+      {
+        "text": "Dashboard",
+        "iconCls": "dashboard",
+        "menu_id": "dashboard_menu",
+        "id": "dashboard_item"
+      }
+      ]
+  },
+  {
+    "title": "Scan",
+    "iconCls": "scan",
+    "id": "scan_tree",
+    "items": [
+      {
+        "text": "All",
+        //"iconCls": "chart_bar",
+        "iconCls": "treeleaf",
+        "menu_id": "scan_all_menu",
+        "id": "scan_all_item"
+      },
+      {
+        "text": "Credit Card",
+        "iconCls": "creditcard",
+        "menu_id": "scan_creditcard_menu",
+        "id": "scan_creditcard_item"
+      },
+      {
+        "text": "SSN",
+        "iconCls": "chart_org",
+        "menu_id": "scan_ssn_menu",
+        "id": "scan_ssn_item"
+      },
+      {
+        "text": "Phone Number",
+        "iconCls": "chart_pie",
+        "menu_id": "scan_phno_menu",
+        "id": "scan_phno_item"
+      },
+      {
+        "text": "Email ID",
+        "iconCls": "chart_pie",
+        "menu_id": "scan_email_menu",
+        "id": "scan_email_item"
+      }     
+    ]
+  },
+  {
+    "title": "Mask",
+    "iconCls": "table",
+    "id": "mask_tree",
+    "items": [
+       {
+        "text": "All",
+        //"iconCls": "all_cls",
+        "iconCls": "treeleaf",
+        "menu_id": "mask_all_menu",
+        "id": "mask_all_item"
+      },
+      {
+        "text": "Credit Card",
+        "iconCls": "creditcard_cls",
+        "menu_id": "mask_creditcard_menu",
+        "id": "mask_creditcard_item"
+      },
+      {
+        "text": "SSN",
+        "iconCls": "ssncls",
+        "menu_id": "mask_ssn_menu",
+        "id": "mask_ssn_item"
+      },
+      {
+        "text": "Phone Number",
+        "iconCls": "phno_cls",
+        "menu_id": "mask_phno_menu",
+        "id": "mask_phno_item"
+      },
+      {
+        "text": "Email IdD",
+        "iconCls": "emailid_cls",
+        "menu_id": "mask_email_menu",
+        "id": "mask_email_item"
+      }     
+    ]
+  },
+  {
+    "title": "Log",
+    "iconCls": "money",
+    "id": "log_tree",
+    "items": [
+      {
+        "text": "All",
+        "iconCls": "all_cls",
+        "menu_id": "log_all_menu",
+        "id": "log_all_item"
+      },
+      {
+        "text": "Credit Card",
+        "iconCls": "creditcard_cls",
+        "menu_id": "log_creditcard_menu",
+        "id": "log_creditcard_item"
+      },
+      {
+        "text": "SSN",
+        "iconCls": "ssncls",
+        "menu_id": "log_ssn_menu",
+        "id": "log_ssn_item"
+      },
+      {
+        "text": "Phone Number",
+        "iconCls": "phno_cls",
+        "menu_id": "log_phno_menu",
+        "id": "mask_phno_item"
+      },
+      {
+        "text": "Email IdD",
+        "iconCls": "emailid_cls",
+        "menu_id": "log_email_menu",
+        "id": "log_email_item"
+      }     
+    ]
+  },
+  {
+    "title": "Config",
+    "iconCls": "money",
+    "id": "log_tree",
+    "items": [
+      {
+        "text": "Scanning Patterns",
+        "iconCls": "all_cls",
+        "menu_id": "config_scanning_patterns",
+        "id": "config_scanning_patterns"
+      },
+      {
+        "text": "Data Types",
+        "iconCls": "all_cls",
+        "menu_id": "config_dt",
+        "id": "config_dt"
+      },
+      {
+        "text": "My PIIs",
+        "iconCls": "all_cls",
+        "menu_id": "config_pii",
+        "id": "config_pii"
+      },                 
+      {
+        "text": "Hadoop FS",
+        "iconCls": "all_cls",
+        "menu_id": "config_hdfs",
+        "id": "config_hdfs"
+      },
+      {
+        "text": "HBase",
+        "iconCls": "creditcard_cls",
+        "menu_id": "log_creditcard_menu",
+        "id": "log_creditcard_item"
+      },
+      {
+        "text": "Cassandra",
+        "iconCls": "ssncls",
+        "menu_id": "log_ssn_menu",
+        "id": "log_ssn_item"
+      },
+      {
+        "text": "Log Folders",
+        "iconCls": "phno_cls",
+        "menu_id": "log_phno_menu",
+        "id": "mask_phno_item"
+      },
+      {
+        "text": "Payment Options",
+        "iconCls": "emailid_cls",
+        "menu_id": "log_email_menu",
+        "id": "log_email_item"
+      }     
+    ]
+  }   
+]
+}
