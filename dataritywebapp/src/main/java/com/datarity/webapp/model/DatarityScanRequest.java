@@ -3,8 +3,6 @@ package com.datarity.webapp.model;
 public class DatarityScanRequest {
 
 	private int id;
-	private boolean isScan;
-	private boolean isMask;
 	private String delimiter = ",";//default ,
 	private String[] inputDirs;
 	private String outputDir;
@@ -16,18 +14,6 @@ public class DatarityScanRequest {
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public boolean isScan() {
-		return isScan;
-	}
-	public void setScan(boolean isScan) {
-		this.isScan = isScan;
-	}
-	public boolean isMask() {
-		return isMask;
-	}
-	public void setMask(boolean isMask) {
-		this.isMask = isMask;
 	}
 	public String getDelimiter() {
 		return delimiter;

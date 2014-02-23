@@ -1,26 +1,23 @@
 package com.datarity.webapp.model;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatarityScanResponse {
 
 	private int id;
+	private List<DatarityScanResult> results = new ArrayList<DatarityScanResult>();
 	
-	private long totalSecurityHoles;
-	
-	private long totalCreditCardNum;
-	private long totalPhoneNum;
-	private long totalEmailId;
-	private long totalSsnNum;
-	
-	private Map<String, Long> fileNameToSecurityHoles = new HashMap<String, Long>();
-
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
-	} 
+	}
+	public List<DatarityScanResult> getResults() {
+		return results;
+	}
+	public void setResults(List<DatarityScanResult> results) {
+		this.results = results;
+	}
 }
