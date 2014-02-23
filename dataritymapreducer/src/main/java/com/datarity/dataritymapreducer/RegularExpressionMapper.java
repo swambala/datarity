@@ -43,7 +43,6 @@ public class RegularExpressionMapper {
 			StringTokenizer tokenizer = new StringTokenizer(line, delimter);
 
 			FileSplit fileSplit = (FileSplit) context.getInputSplit();
-			String fileName = fileSplit.getPath().getName();
 			String fullFileName = fileSplit.getPath().toUri().getPath();
 			int ccCount=0, phCount=0, ssnCount=0, emailCount=0;
 			String word;
@@ -63,10 +62,10 @@ public class RegularExpressionMapper {
 					continue;
 				}
 			}
-			context.write(new Text(fileName+"_CREDITCARD"), new IntWritable(ccCount));
-			context.write(new Text(fileName+"_EMAIL"), new IntWritable(emailCount));
-			context.write(new Text(fileName+"_PHONE"), new IntWritable(phCount));
-			context.write(new Text(fileName+"_SSN"), new IntWritable(ssnCount));
+			context.write(new Text(fullFileName+"_CREDITCARD"), new IntWritable(ccCount));
+			context.write(new Text(fullFileName+"_EMAIL"), new IntWritable(emailCount));
+			context.write(new Text(fullFileName+"_PHONE"), new IntWritable(phCount));
+			context.write(new Text(fullFileName+"_SSN"), new IntWritable(ssnCount));
 			
 			context.write(new Text(MaskEnum.CREDIT_CARD.toString()), new IntWritable(ccCount));
 			context.write(new Text(MaskEnum.EMAIL.toString()), new IntWritable(emailCount));
