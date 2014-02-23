@@ -28,7 +28,7 @@ public class RegularExpressionMapper {
 			"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
-	private static final String PHONE_PATTERN = "[1-9]\\d{2}-[1-9]\\d{2}-\\d{4}";
+	private static final String PHONE_PATTERN = "[0-9]{3}-[0-9]{3}-[0-9]{4}";
 	private static Pattern p = Pattern.compile(PHONE_PATTERN);
 	private static Pattern p1 = Pattern.compile(EMAIL_PATTERN);
 
@@ -143,9 +143,7 @@ public class RegularExpressionMapper {
 		job.waitForCompletion(true);
 	}
 	public static void main(String args[]) throws Exception {
-//		delete(new File("/Users/barath/b/barath/hackathon/s/outputfiles"));
 		runJob(args[2], args[0], args[1]);
-		
 	}
 
 	static void delete(File f) throws IOException {

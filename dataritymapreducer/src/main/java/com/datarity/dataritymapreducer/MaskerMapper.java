@@ -32,7 +32,7 @@ public class MaskerMapper {
 			"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
-	private static final String PHONE_PATTERN = "[1-9]\\d{2}-[1-9]\\d{2}-\\d{4}";
+	private static final String PHONE_PATTERN = "[0-9]{3}-[0-9]{3}-[0-9]{4}";
 	private static Pattern p = Pattern.compile(PHONE_PATTERN);
 	private static Pattern p1 = Pattern.compile(EMAIL_PATTERN);
 	
@@ -72,13 +72,13 @@ public class MaskerMapper {
     			while (tokenizer.hasMoreTokens()) {
     				word = tokenizer.nextToken();
     				if(isEmailId(word)){
-    					newLine.append("XXXX@XXX.com");
+    					newLine.append("EEEE@EEE.EEE");
     				}else if(isPhoneNumber(word)){
-    					newLine.append("XXX-XXX-XXXX");
+    					newLine.append("PPP-PPP-PPPP");
     				}else if(isCreditCard(stripSpecialCharacters(word))){
     					newLine.append("XXXX-XXXX-XXXX-XXXX");
     				}else if(isSSN(stripSpecialCharacters(word))){
-    					newLine.append("XXX-XX-XXXX");
+    					newLine.append("SSS-SS-SSSS");
     				}
     				else {
     					newLine.append(word);

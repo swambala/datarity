@@ -29,7 +29,7 @@ public class DataCreator {
 
 	public void createData() throws Exception {
 		for(int j=0;j<5;j++){
-			File f = new File("/Users/bytes4brains/git/log"+j+".txt");
+			File f = new File("/Users/barath/b/barath/hackathon/s/inputfiles/"+j+".txt");
 			BufferedWriter writer = new BufferedWriter(new FileWriter(f));
 			Random randomGenerator = new Random();
 			int number = 0;
@@ -54,7 +54,7 @@ public class DataCreator {
 						temp.substring(6);
 						buffer.append(","+temp);
 					} else if (number == 3) {
-						buffer.append(","+randomIdentifier()+".com");
+						buffer.append(","+randomIdentifier()+"@datarity.com");
 					} else if (number == 4) {
 		
 					}
@@ -87,5 +87,6 @@ public class DataCreator {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("Done");
 	}
 }
