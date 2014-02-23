@@ -3,39 +3,77 @@ package com.datarity.webapp.service;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.datarity.webapp.model.DatarityScanRequest;
 import com.datarity.webapp.model.DatarityScanResponse;
 import com.datarity.webapp.model.DatarityScanResult;
+import com.datarity.webapp.processor.CommandExecutor;
 
 @Controller
 public class DatarityService {
 	
 	private static final Logger logger = Logger.getLogger(DatarityService.class);
-	private static final String DEFAULT_PATH_OUTPUT = "/Users/barath/b/barath/hackathon/s/outputfiles/";
+	private static final String DEFAULT_PATH_OUTPUT = "/b/d/";
 	
-	@RequestMapping(value = "/scan", method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody String scan(@RequestBody DatarityScanRequest drReq) {
+	@RequestMapping(value = "/scan", method = RequestMethod.GET)
+	public @ResponseBody String scan() {
 		logger.debug("Request to Scan");
-		drReq.setId(1);
+		
+//		if(false) {
+//			InputStream fs = DatarityService.class.getResourceAsStream("sampledata.txt");
+//			try {
+//				List<String> readLines = IOUtils.readLines(fs);
+//				StringBuffer sb = new StringBuffer();
+//				for (String line : readLines) {
+//					sb.append(line+"\n");
+//					
+//				}
+//				return sb.toString();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+		
 		DatarityScanResponse drRes = new DatarityScanResponse();
 		drRes.setId(1);
+		CommandExecutor executor = new CommandExecutor();
+		executor.executeCommand(CommandExecutor.CMD_SCAN);
+		executor.executeCommand(CommandExecutor.CMD_CPY_LOCAL);
+		
+		String[] allFolderNames = getAllFolderNames(DEFAULT_PATH_OUTPUT);
+		DatarityScanResult drScanResult;
+		
+//		long previousId = -1;
+		
+		for (int i = 0; i < allFolderNames.length; i++) {
+			drScanResult = getDRScanResult(DEFAULT_PATH_OUTPUT + allFolderNames[i]);
+			if (drScanResult == null) {
+				continue;
+			}
+			drScanResult.setId(allFolderNames[i]);
+//			
+//			if (previousId < Long.parseLong(drScanResult.getId())) {
+//				drRes.getResults().clear();
+//				drRes.getResults().add(drScanResult);	
+//			}
+		}
+		
 		return getJson(drRes);
 	}
 	
@@ -47,13 +85,19 @@ public class DatarityService {
 		
 		String[] allFolderNames = getAllFolderNames(DEFAULT_PATH_OUTPUT);
 		DatarityScanResult drScanResult;
+		long previousId = -1;
 		for (int i = 0; i < allFolderNames.length; i++) {
 			drScanResult = getDRScanResult(DEFAULT_PATH_OUTPUT + allFolderNames[i]);
 			if (drScanResult == null) {
 				continue;
 			}
 			drScanResult.setId(allFolderNames[i]);
-			drRes.getResults().add(drScanResult);
+			
+			if (previousId < Long.parseLong(drScanResult.getId())) {
+				drRes.getResults().clear();
+				drRes.getResults().add(drScanResult);	
+				previousId = Long.parseLong(drScanResult.getId());
+			}
 		}
 		
 		return getJson(drRes);
@@ -141,6 +185,11 @@ public class DatarityService {
 		logger.debug("Request to Mask id: " + id);
 		DatarityScanResponse drRes = new DatarityScanResponse();
 		drRes.setId(1);
+
+		CommandExecutor executor = new CommandExecutor();
+		String maskFolder = CommandExecutor.CMD_MASK.replaceAll("KEYKEY", id);
+		logger.debug("Request to Mask Folder: " + maskFolder);
+		executor.executeCommand(maskFolder);
 		return getJson(drRes);
 	}
 	

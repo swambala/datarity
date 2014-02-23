@@ -60,7 +60,7 @@ Ext.define('DATARITY.controller.PortletPanel', {
         var url = './server/dataritysample_2.json';
         if(scanReportAllDataStore.getProxy().url == './server/dataritysample_2.json')
             url = './server/dataritysample_1.json';
-
+        url='./ws/scan';
         scanReportAllDataStore.getProxy().url = url;
         scanReportAllDataStore.load();
 

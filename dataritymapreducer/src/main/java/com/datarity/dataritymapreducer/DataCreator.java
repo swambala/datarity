@@ -29,12 +29,12 @@ public class DataCreator {
 
 	public void createData() throws Exception {
 		for(int j=0;j<5;j++){
-			File f = new File("/Users/barath/b/barath/hackathon/s/inputfiles/"+j+".txt");
+			File f = new File("/Users/barath/b/barath/hackathon/s/inputfiles/abc"+j+".txt");
 			BufferedWriter writer = new BufferedWriter(new FileWriter(f));
 			Random randomGenerator = new Random();
 			int number = 0;
 			StringBuffer buffer = new StringBuffer();
-			for(int k=0;k<100000;k++){
+			for(int k=0;k<1000;k++){
 				buffer.append(new Date().toString());
 				for (int i = 0; i < 5; i++) {
 					number = randomGenerator.nextInt(5);

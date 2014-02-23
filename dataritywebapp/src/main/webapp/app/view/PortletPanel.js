@@ -23,7 +23,7 @@
             actionMethods: {
                 read: 'GET'
             },
-            url: './server/dataritysample_1.json',
+            url: './ws/scanhistory',
             extraParams: {
                 todo : 'getChartDatas'
             },
@@ -56,6 +56,7 @@
 
                 var fileNameToSecurityTypeToEscapeArr = scanReportAllDataStore.data.items[0].data.fileNameToSecurityTypeToEscape;
 
+                keySelected = '/user/datarity/' + keySelected;
                 var pieChartDataArr = fileNameToSecurityTypeToEscapeArr[keySelected];
 
                 var scanReporPieData = [];
@@ -312,7 +313,7 @@ Ext.define('scanReportColumnData', {
 
                         var valueArr = item.value;
                         var name    = valueArr[0];
-                        
+                        name = '/user/datarity/' + name;
                         var fileNameToSecurityTypeToEscapeArr = scanReportAllDataStore.data.items[0].data.fileNameToSecurityTypeToEscape;
 
                         var pieChartDataArr = fileNameToSecurityTypeToEscapeArr[name];
